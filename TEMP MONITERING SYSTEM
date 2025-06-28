@@ -1,0 +1,65 @@
+//load libraries
+#include <Wire.h>
+
+#include <LCD.h>
+
+#include <LiquidCrystal_I2C.h>
+
+The I defined the variables needed by the LCD and the LM35
+
+I added the variable tempf to help display the temperature in Fahrenheit
+
+//Define variables for the LCD
+
+#define I2C_ADDR 0x27 //Define I2C Address where the PCF8574A is
+
+#define BACKLIGHT_PIN 3
+
+#define En_pin 2
+
+#define Rw_pin 1
+
+#define Rs_pin 0
+
+#define D4_pin 4
+
+#define D5_pin 5
+
+#define D6_pin 6
+
+#define D7_pin 7
+
+//define variables for the LM35 temperature sensor
+
+float temp; //Define the temp float variable
+
+float tempf; //Define the Fahrenheit float variable
+
+int sensor = 0; // sensor middle pin on analog pin 0
+
+Then I initialized the LCD using this line:
+
+//Initialize the LCD
+LiquidCrystal_I2C lcd(I2C_ADDR, En_pin,Rw_pin,Rs_pin,D4_pin,D5_pin,D6_pin,D7_pin);
+
+In the Void setup, I tell the Arduinio that I am using a 16X2 LCD, turn on the backlights and print some lines that will not change.
+
+void setup() {
+
+lcd.begin (16,2); //Define the LCD as 16 column by 2 rows
+
+//Switch on the backlight
+
+lcd.setBacklightPin(BACKLIGHT_PIN,POSITIVE);
+
+lcd.setBacklight(HIGH);
+
+lcd.setCursor(0,0); //goto first column (column 0) and first line (Line 0)
+
+lcd.print("Temp C = "); //Print at cursor Location
+
+lcd.setCursor(0,1); //goto first column (column 0) and second line (line 1)
+
+lcd.print("Temp F = "); //Print at cursor location
+
+}
